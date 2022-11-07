@@ -26,6 +26,8 @@ class UserDB:
             reader = csv.reader(f)
             # decode the values from bytes and load into memory
             self.dictionary = {k.encode("utf-8"):v for k,v in reader}
+            # convert all value strings to bools
+            self.dictionary = {k:True if v == "True" else False for k,v in self.dictionary.items()}
     
     def change_user(self,uid:bytes,pincode:int,is_admin:bool):
         """
